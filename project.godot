@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Idle_game"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+run/main_scene="uid://wr65jtp6b2es"
+config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
 [dotnet]

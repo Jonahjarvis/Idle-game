@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://wr65jtp6b2es"]
+
+[ext_resource type="Script" uid="uid://dqgfa3ssx8tna" path="res://scripts/Main.cs" id="1_o5qli"]
+
+[node name="Main" type="Control" unique_id=1816132853]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o5qli")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=739229461]
+layout_mode = 0
+offset_right = 95.0
+offset_bottom = 58.0
+
+[node name="StatsLabel" type="Label" parent="VBoxContainer" unique_id=1827546628]
+layout_mode = 2
+
+[node name="TrainButton" type="Button" parent="VBoxContainer" unique_id=68570817]
+custom_minimum_size = Vector2(5, 20)
+layout_mode = 2
+text = "Train Strength"
