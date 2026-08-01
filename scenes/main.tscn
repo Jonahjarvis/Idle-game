@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://wr65jtp6b2es"]
 
 [ext_resource type="Script" uid="uid://b5lpodw32u7v" path="res://scripts/Core/GameManager.cs" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bb38wec2rs5pi" path="res://scripts/UI/UIManager.cs" id="2_0wfyh"]
 
 [node name="GameManager" type="Control" unique_id=1816132853]
 layout_mode = 3
@@ -11,20 +12,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o5qli")
 
-[node name="UIManager" type="Control" parent="." unique_id=1930165921]
+[node name="UIManager" type="Control" parent="." unique_id=1930165921 node_paths=PackedStringArray("gameManager")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_0wfyh")
+gameManager = NodePath("..")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIManager" unique_id=739229461]
 layout_mode = 0
 offset_right = 119.0
 offset_bottom = 58.0
 
+[node name="StatsLabel" type="Label" parent="UIManager/VBoxContainer" unique_id=1827546628]
+layout_mode = 2
+
 [node name="TrainButton" type="Button" parent="UIManager/VBoxContainer" unique_id=68570817]
 custom_minimum_size = Vector2(5, 20)
 layout_mode = 2
 text = "Train Strength"
-
-[node name="StatsLabel" type="Label" parent="UIManager/VBoxContainer" unique_id=1827546628]
-layout_mode = 2

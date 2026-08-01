@@ -2,7 +2,8 @@ using Godot;
 using System;
 using Idle_game.scripts.Tasks; 
 using Idle_game.scripts.Player; 
-
+using Idle_game.scripts.UI;
+ 
 namespace Idle_game.scripts.Core
 {
 	public partial class GameManager : Node
@@ -11,6 +12,8 @@ namespace Idle_game.scripts.Core
 		// so the UI can't accidentally overwrite the player object.
 		public PlayerStats CurrentPlayer { get; private set; }
 		public GameTask CurrentTask { get; private set; }
+		
+
 
 		public override void _EnterTree()
 		{

@@ -6,11 +6,13 @@ namespace Idle_game.scripts.UI
 {
 	public partial class UIManager : Control
 	{
-		// [Export] makes this visible in the Godot Editor Inspector
+		// [Export] makes the class visible in the Godot Editor Inspector
 		[Export] 
 		private GameManager gameManager;
 
 		private Label statsLabel;
+		
+		
 		private Button trainButton;
 
 		public override void _Ready()
