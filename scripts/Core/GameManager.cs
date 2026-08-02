@@ -9,15 +9,15 @@ namespace Idle_game.scripts.Core
 {
 	public partial class GameManager : Node
 	{
-		// Public properties so the UI can read the players data, but private setters 
+		// Public properties so the UI can read the players data
 		public PlayerStats CurrentPlayer { get; private set; }
 		
 		// List of all tasks available in the game, each task has a category to identify which part of the UI it should be placed in.
-		// Some tasks could also be made available later in the game and will be added to the list after certain breakpoints if this is the case
+		
 		public List<GameTask> AvailableTasks { get; private set;}
 		
 		public GameTask ActiveTask { get; private set; }
-		// Event to tell UI to update button when a task is changed
+		// Event for UI to listen to when the selected task changes
 		public event Action OnActiveTaskChanged;
 
 		public override void _EnterTree()
@@ -42,10 +42,11 @@ namespace Idle_game.scripts.Core
 			// If task is already on, switch off
 			if (ActiveTask == clickedTask)
 			{
-				ActiveTask.Toggle(); // This sets IsActive to false and resets TimeSpent
+				// This sets IsActive to false and resets TimeSpent
+				ActiveTask.Toggle(); 
 				ActiveTask = null;
 			}
-			// If they clicked a new task...
+			// If task is not already on
 			else
 			{
 				// Turn off the old task if one was running
@@ -59,7 +60,7 @@ namespace Idle_game.scripts.Core
 				ActiveTask.Toggle();
 			}
 
-			// Alert the UI that the state has changed
+			// Alert any listeners (the UI) that the active task has changed
 			OnActiveTaskChanged?.Invoke();
 		}
 	}

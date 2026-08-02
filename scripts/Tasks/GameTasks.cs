@@ -20,7 +20,7 @@ namespace Idle_game.scripts.Tasks
 		public bool IsActive { get; private set; }
 		
 		public TaskCategory Category { get; private set; }
-		// We pass in PlayerStats so the task knows who to give the reward to
+		// Pass in PlayerStats so the task can grant the reward to the player
 		protected PlayerStats Stats; 
 
 		public GameTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
@@ -35,14 +35,16 @@ namespace Idle_game.scripts.Tasks
 
 		public void Toggle()
 		{
+			// Just turns the task on or off
 			IsActive = !IsActive;
 			if (!IsActive) TimeSpent = 0; // Reset progress if canceled
 		}
 
-		// This handles the delta math for EVERY task in the game
+		// Delta math to determine if a task has been completed or not
 		public void ProcessTask(double delta)
 		{
 			if (!IsActive) return;
+			// delta is time since last frame rendered so keeps task progress consistent regardless of frame rate
 			TimeSpent += delta;
 
 			while (TimeSpent >= Duration)
@@ -52,7 +54,7 @@ namespace Idle_game.scripts.Tasks
 			}
 		}
 
-		// The 'abstract' keyword forces any child class to write this specific method
+		// All tasks need rewards
 		protected abstract void GrantReward();
 	}
 }

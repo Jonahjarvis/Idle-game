@@ -5,7 +5,7 @@ namespace Idle_game.scripts.Player
 {
 	public class PlayerStats
 	{
-		// notify 
+		// notify any listeners when stats are updated
 		public event Action OnStatsUpdated;
 		
 		public int Health { get; private set; } = 100;

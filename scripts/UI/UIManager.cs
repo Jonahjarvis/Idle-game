@@ -8,18 +8,21 @@ namespace Idle_game.scripts.UI
 {
 	public partial class UIManager : Control
 	{
+		// Export makes GameManager visible for UIManager in the inspector tool
+		// So I can drag the GameManager node into UIManagers inspector to give UIManager a reference
 		[Export] 
 		public GameManager GameManagerNode { get; set; }
-
+		// Containers and labels for displaying stats and tasks
 		private Label statsLabel;
 		private VBoxContainer trainingContainer;
 		private VBoxContainer combatContainer;
 		
-		// Dictionary of generated buttons to easily change text
+		// Dictionary of all generated task buttons
 		private Dictionary<GameTask, Button> taskButtons = new Dictionary<GameTask, Button>();
 
 		public override void _Ready()
 		{
+			// Get references to the existing display sections
 			statsLabel = GetNode<Label>("TrainingPage/StatsLabel");
 			trainingContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/TrainingColumn");
 			combatContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/CombatColumn");
@@ -36,14 +39,16 @@ namespace Idle_game.scripts.UI
 
 		private void GenerateTaskButtons()
 		{
+			// Generate a button for every task in AvailableTasks
 			foreach (var task in GameManagerNode.AvailableTasks)
 			{
 				Button newButton = new Button();
 				newButton.Text = $"Start {task.TaskName}";
 				
-				// The button now tells the Manager to handle the toggle logic
+				// Use ToggleTask logic for the specific task when its associated button is pressed
 				newButton.Pressed += () => GameManagerNode.ToggleTask(task);
 
+				// Task buttons are sorted into different parts of the UI depending on category
 				if (task.Category == TaskCategory.Training)
 				{
 					trainingContainer.AddChild(newButton);
@@ -53,14 +58,14 @@ namespace Idle_game.scripts.UI
 					combatContainer.AddChild(newButton);
 				}
 
-				// Save the button in our dictionary
+				// Save the button to dictionary
 				taskButtons.Add(task, newButton);
 			}
 		}
 
 		private void UpdateButtonVisuals()
 		{
-			// Loop through all our generated buttons and ensure their text is correct
+			// Loop through all generated buttons and ensure their text is correct
 			foreach (var kvp in taskButtons)
 			{
 				GameTask task = kvp.Key;
@@ -70,7 +75,7 @@ namespace Idle_game.scripts.UI
 				button.Text = task.IsActive ? $"Stop {task.TaskName}" : $"Start {task.TaskName}";
 			}
 		}
-
+		
 		private void UpdateStatsDisplay()
 		{
 			statsLabel.Text =
