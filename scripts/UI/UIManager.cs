@@ -1,53 +1,83 @@
 using Godot;
 using System;
-using Idle_game.scripts.Core; 
+using System.Collections.Generic;
+using Idle_game.scripts.Core;
+using Idle_game.scripts.Tasks;
 
 namespace Idle_game.scripts.UI
 {
 	public partial class UIManager : Control
 	{
-		// [Export] makes the class visible in the Godot Editor Inspector
 		[Export] 
-		private GameManager gameManager;
+		public GameManager GameManagerNode { get; set; }
 
 		private Label statsLabel;
+		private VBoxContainer trainingContainer;
+		private VBoxContainer combatContainer;
 		
-		
-		private Button trainButton;
+		// Dictionary of generated buttons to easily change text
+		private Dictionary<GameTask, Button> taskButtons = new Dictionary<GameTask, Button>();
 
 		public override void _Ready()
 		{
-			statsLabel = GetNode<Label>("VBoxContainer/StatsLabel");
-			trainButton = GetNode<Button>("VBoxContainer/TrainButton");
+			statsLabel = GetNode<Label>("TrainingPage/StatsLabel");
+			trainingContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/TrainingColumn");
+			combatContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/CombatColumn");
 			
-			trainButton.Pressed += OnTrainButtonPressed;
+			// Listen for when stats change to update display
+			GameManagerNode.CurrentPlayer.OnStatsUpdated += UpdateStatsDisplay;
 			
-			// Subscribe to the backend data event!
-			gameManager.CurrentPlayer.OnStatsUpdated += UpdateStatsDisplay;
-			
-			// Run once to populate the initial text
+			// Listen for when the active task changes so we can update button text
+			GameManagerNode.OnActiveTaskChanged += UpdateButtonVisuals;
+
 			UpdateStatsDisplay();
+			GenerateTaskButtons();
 		}
 
-		private void OnTrainButtonPressed()
+		private void GenerateTaskButtons()
 		{
-			// The UI doesn't do any math; it just passes the command to the manager.
-			gameManager.ToggleCurrentTask();
-			
-			// Update the button visually
-			trainButton.Text = gameManager.CurrentTask.IsActive ? 
-				$"Stop {gameManager.CurrentTask.TaskName}" : 
-				$"Start {gameManager.CurrentTask.TaskName}";
+			foreach (var task in GameManagerNode.AvailableTasks)
+			{
+				Button newButton = new Button();
+				newButton.Text = $"Start {task.TaskName}";
+				
+				// The button now tells the Manager to handle the toggle logic
+				newButton.Pressed += () => GameManagerNode.ToggleTask(task);
+
+				if (task.Category == TaskCategory.Training)
+				{
+					trainingContainer.AddChild(newButton);
+				}
+				else if (task.Category == TaskCategory.Combat)
+				{
+					combatContainer.AddChild(newButton);
+				}
+
+				// Save the button in our dictionary
+				taskButtons.Add(task, newButton);
+			}
+		}
+
+		private void UpdateButtonVisuals()
+		{
+			// Loop through all our generated buttons and ensure their text is correct
+			foreach (var kvp in taskButtons)
+			{
+				GameTask task = kvp.Key;
+				Button button = kvp.Value;
+
+				// If this is the active task, say "Stop", otherwise say "Start"
+				button.Text = task.IsActive ? $"Stop {task.TaskName}" : $"Start {task.TaskName}";
+			}
 		}
 
 		private void UpdateStatsDisplay()
 		{
-			// The UI reads the data from the manager and formats it.
 			statsLabel.Text =
-				$"Health: {gameManager.CurrentPlayer.Health}\n" +
-				$"Strength: {gameManager.CurrentPlayer.Strength}\n" +
-				$"Magical Power: {gameManager.CurrentPlayer.MagicalPower}\n" +
-				$"Mana: {gameManager.CurrentPlayer.Mana}";
+				$"Health: {GameManagerNode.CurrentPlayer.Health}\n" +
+				$"Strength: {GameManagerNode.CurrentPlayer.Strength}\n" +
+				$"Magical Power: {GameManagerNode.CurrentPlayer.MagicalPower}\n" +
+				$"Mana: {GameManagerNode.CurrentPlayer.Mana}";
 		}
 	}
 }

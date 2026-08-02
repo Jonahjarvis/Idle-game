@@ -20,5 +20,11 @@ namespace Idle_game.scripts.Player
 			Strength += StrengthIncrement;
 			OnStatsUpdated?.Invoke();
 		}
+		public void IncreaseMana() 
+		{
+			int ManaIncrement = 1;
+			Mana += ManaIncrement;
+			OnStatsUpdated?.Invoke();
+		}
 	}
 }
