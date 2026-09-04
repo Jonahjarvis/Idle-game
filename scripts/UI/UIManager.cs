@@ -28,7 +28,7 @@ namespace Idle_game.scripts.UI
 			combatContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/CombatColumn");
 			
 			// Listen for when stats change to update display
-			GameManagerNode.CurrentPlayer.OnStatsUpdated += UpdateStatsDisplay;
+			GameManagerNode.CurrentPlayer.OnAnyStatUpdated += UpdateStatsDisplay;
 			
 			// Listen for when the active task changes so we can update button text
 			GameManagerNode.OnActiveTaskChanged += UpdateButtonVisuals;
@@ -80,8 +80,8 @@ namespace Idle_game.scripts.UI
 		{
 			statsLabel.Text =
 				$"Health: {GameManagerNode.CurrentPlayer.Health}\n" +
-				$"Mana: {GameManagerNode.CurrentPlayer.Mana:F2}\n" +
-				$"Mana Regen: {GameManagerNode.CurrentPlayer.ManaRegen}";
+				$"Mana: {GameManagerNode.CurrentPlayer.CurrentMana:F2}\n" +
+				$"Mana Regen: {GameManagerNode.CurrentPlayer.ManaRegen.Total}";
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace Idle_game.scripts.Core
 		public override void _Process(double delta)
 		{
 			// The GameManager manages time, nothing else.
-			CurrentPlayer.IncreaseMana((CurrentPlayer.ManaRegen + CurrentPlayer.BonusManaRegen) * delta);
+			CurrentPlayer.IncreaseCurrentMana(CurrentPlayer.ManaRegen.Total * delta);
 			ActiveTask?.ProcessTask(delta);
 		}
 		

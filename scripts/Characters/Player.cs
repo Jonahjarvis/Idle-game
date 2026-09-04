@@ -5,53 +5,45 @@ namespace Idle_game.scripts.Characters
 {
 	public class Player
 	{
-		// notify any listeners when stats are updated
-		public event Action OnStatsUpdated;
+		public event Action OnAnyStatUpdated;
+		
+		public PlayerStat ManaRegen { get; private set; } = new PlayerStat(0.0);
+		public PlayerStat MaxMana { get; private set; } = new PlayerStat(5.0);
 		
 		public int Health { get; private set; } = 100;
-		public Double Mana { get; private set; } = 0;
-		public int MaxMana { get; private set; } = 0;
+		public Double CurrentMana { get; private set; } = 0;
 		
-		public double ManaRegen { get; private set; } = 0.0;
-		public double BonusManaRegen { get; private set; } = 0.0;
+		public Player()
+		{
+			// Tell the Player to listen to its own child objects.
+			// Whenever a stat updates, it calls TriggerStatUpdate.
+			ManaRegen.OnStatUpdated += TriggerStatUpdate;
+			MaxMana.OnStatUpdated += TriggerStatUpdate;
+		}
+		private void TriggerStatUpdate()
+		{
+			// Rebroadcast the change to the rest of the game
+			OnAnyStatUpdated?.Invoke();
+		}
 		
-		public int MaxManaIncrement { get; private set; } = 1;
+		
+		public void IncreaseCurrentMana(double IncreaseAmount)
+		{
+			if (CurrentMana + IncreaseAmount >= MaxMana.Total) {
+				CurrentMana = MaxMana.Total;
+			} else {
+				CurrentMana += IncreaseAmount;
+			}
+			OnAnyStatUpdated?.Invoke();
+			
+		}
+		public void DecreaseCurrentMana(double DecreaseAmount)
+		{
+			// logic to check if the player has enough mana will occur before the spell/task is cast so no need to prevent it here.
+			CurrentMana -= DecreaseAmount;
+			OnAnyStatUpdated?.Invoke();
+		}
 
-		public void IncreaseMaxMana() 
-		{
-			MaxMana += MaxManaIncrement;
-			OnStatsUpdated?.Invoke();
-		}
-		
-		public void IncreaseMana(double ManaIncrease) 
-		{
-			Mana += ManaIncrease;
-			OnStatsUpdated?.Invoke();
-		}
-		public void DecreaseMana(double ManaDecrease) 
-		{
-			// Decreases mana by given 
-			Mana -= ManaDecrease;
-			OnStatsUpdated?.Invoke();
-		}
-		
-		public void IncreaseManaRegen(double regenIncrease)
-		{
-			// base mana regen can be increased as player progresses
-			ManaRegen += regenIncrease;
-		}
-		
-		// increases or decreases to regen will always be a flat cost hence the bonus stat to keep base regen stable
-		public void IncreaseBonusManaRegen(double regenIncrease)
-		{
-		
-			BonusManaRegen += regenIncrease;
-		}
-		
-		public void DecreaseBonusManaRegen(double regenDecrease)
-		{
-			BonusManaRegen -= regenDecrease;
-		}
 		
 	}
 }
