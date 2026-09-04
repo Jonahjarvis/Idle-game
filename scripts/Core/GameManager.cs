@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Idle_game.scripts.Tasks; 
-using Idle_game.scripts.Player; 
+using Idle_game.scripts.Characters; 
 
  
 namespace Idle_game.scripts.Core
@@ -10,7 +10,7 @@ namespace Idle_game.scripts.Core
 	public partial class GameManager : Node
 	{
 		// Public properties so the UI can read the players data
-		public PlayerStats CurrentPlayer { get; private set; }
+		public Player CurrentPlayer { get; private set; }
 		
 		// List of all tasks available in the game, each task has a category to identify which part of the UI it should be placed in.
 		
@@ -23,7 +23,7 @@ namespace Idle_game.scripts.Core
 		public override void _EnterTree()
 		{
 			// Initialize the player and task list
-			CurrentPlayer = new PlayerStats();
+			CurrentPlayer = new Player();
 			AvailableTasks = new List<GameTask>();
 			// Add starting tasks to AvailableTasks
 			AvailableTasks.Add(new ManaCyclingTask(CurrentPlayer));

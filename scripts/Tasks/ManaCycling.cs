@@ -1,12 +1,12 @@
 using Godot;
 using System;
-using Idle_game.scripts.Player;
+using Idle_game.scripts.Characters;
  
 namespace Idle_game.scripts.Tasks 
 {
 	public class ManaCyclingTask : ToggleTask
 	{
-		public ManaCyclingTask(PlayerStats stats) 
+		public ManaCyclingTask(Player stats) 
 			: base("Cycling Mana", stats,TaskCategory.Training) 
 			{ 
 				

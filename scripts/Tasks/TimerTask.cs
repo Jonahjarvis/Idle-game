@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Idle_game.scripts.Player; 
+using Idle_game.scripts.Characters; 
 
 
 namespace Idle_game.scripts.Tasks
@@ -13,7 +13,7 @@ namespace Idle_game.scripts.Tasks
 		public double TimeSpent { get; private set; }
 		
 
-		public TimerTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
+		public TimerTask(string taskName, double duration, Player stats, TaskCategory taskCategory)
 			: base(taskName, stats, taskCategory)
 		{
 			Duration = duration;

@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Idle_game.scripts.Player; 
+using Idle_game.scripts.Characters; 
 
 
 namespace Idle_game.scripts.Tasks
@@ -19,10 +19,10 @@ namespace Idle_game.scripts.Tasks
 		public bool IsActive { get; protected set; }
 		
 		public TaskCategory Category { get; protected set; }
-		// Pass in PlayerStats so the task can grant the reward/stat modifier to the player
-		protected PlayerStats Stats; 
+		// Pass in Player so the task can grant the reward/stat modifier to the player
+		protected Player Stats; 
 
-		public GameTask(string taskName, PlayerStats stats, TaskCategory taskCategory)
+		public GameTask(string taskName, Player stats, TaskCategory taskCategory)
 		{
 			TaskName = taskName;
 			Stats = stats;

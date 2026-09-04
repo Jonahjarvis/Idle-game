@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-namespace Idle_game.scripts.Player 
+namespace Idle_game.scripts.Characters 
 {
-	public class PlayerStats
+	public class Player
 	{
 		// notify any listeners when stats are updated
 		public event Action OnStatsUpdated;
