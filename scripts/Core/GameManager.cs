@@ -26,7 +26,6 @@ namespace Idle_game.scripts.Core
 			CurrentPlayer = new PlayerStats();
 			AvailableTasks = new List<GameTask>();
 			// Add starting tasks to AvailableTasks
-			AvailableTasks.Add(new StrengthTrainingTask(CurrentPlayer));
 			AvailableTasks.Add(new IntelligenceTrainingTask(CurrentPlayer));
 		}
 

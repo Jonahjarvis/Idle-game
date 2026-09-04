@@ -14,12 +14,7 @@ namespace Idle_game.scripts.Player
 		public int MagicalPower { get; private set; } = 1;
 		public int ManaRegen { get; private set; } = 1;
 
-		public void IncreaseStrength() 
-		{
-			int StrengthIncrement = 1;
-			Strength += StrengthIncrement;
-			OnStatsUpdated?.Invoke();
-		}
+
 		public void IncreaseMana() 
 		{
 			int ManaIncrement = 1;
