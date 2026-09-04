@@ -9,16 +9,14 @@ namespace Idle_game.scripts.Player
 		public event Action OnStatsUpdated;
 		
 		public int Health { get; private set; } = 100;
-		public int Mana { get; private set; } = 0;
-		public int Strength { get; private set; } = 0;
-		public int MagicalPower { get; private set; } = 1;
-		public int ManaRegen { get; private set; } = 1;
+		public float Mana { get; private set; } = 0;
+		public int MaxMana { get; private set; } = 0;
+		public float ManaRegen { get; private set; } = 0.0;
+		public int MaxManaIncrement { get; private set; } = 1;
 
-
-		public void IncreaseMana() 
+		public void IncreaseMaxMana() 
 		{
-			int ManaIncrement = 1;
-			Mana += ManaIncrement;
+			MaxMana += ManaIncrement;
 			OnStatsUpdated?.Invoke();
 		}
 	}

@@ -5,23 +5,13 @@ using Idle_game.scripts.Player;
 
 namespace Idle_game.scripts.Tasks
 {
-	// task type enum for formatting (similar tasks will have buttons grouped)
-	public enum TaskCategory 
-	{
-		Training,
-		Combat
-	}
 	
-	public abstract class GameTask
+	public abstract class TimerTask : GameTasks
 	{
-		public string TaskName { get; private set; }
+
 		public double Duration { get; private set; }
 		public double TimeSpent { get; private set; }
-		public bool IsActive { get; private set; }
 		
-		public TaskCategory Category { get; private set; }
-		// Pass in PlayerStats so the task can grant the reward to the player
-		protected PlayerStats Stats; 
 
 		public GameTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
 		{
@@ -33,7 +23,7 @@ namespace Idle_game.scripts.Tasks
 			Category = taskCategory;
 		}
 
-		public void Toggle()
+		public override void Toggle()
 		{
 			// Just turns the task on or off
 			IsActive = !IsActive;
@@ -54,7 +44,5 @@ namespace Idle_game.scripts.Tasks
 			}
 		}
 
-		// All tasks need rewards
-		protected abstract void GrantReward();
 	}
 }

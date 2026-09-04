@@ -26,12 +26,13 @@ namespace Idle_game.scripts.Core
 			CurrentPlayer = new PlayerStats();
 			AvailableTasks = new List<GameTask>();
 			// Add starting tasks to AvailableTasks
-			AvailableTasks.Add(new IntelligenceTrainingTask(CurrentPlayer));
+			AvailableTasks.Add(new ManaCyclingTask(CurrentPlayer));
 		}
 
 		public override void _Process(double delta)
 		{
 			// The GameManager manages time, nothing else.
+			CurrentPlayer.Mana += (CurrentPlayer.ManaRegen * delta);
 			ActiveTask?.ProcessTask(delta);
 		}
 		
