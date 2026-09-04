@@ -9,7 +9,7 @@ namespace Idle_game.scripts.Player
 		public event Action OnStatsUpdated;
 		
 		public int Health { get; private set; } = 100;
-		public float Mana { get; private set; } = 0;
+		public Double Mana { get; private set; } = 0;
 		public int MaxMana { get; private set; } = 0;
 		
 		public double ManaRegen { get; private set; } = 0.0;
@@ -35,20 +35,20 @@ namespace Idle_game.scripts.Player
 			OnStatsUpdated?.Invoke();
 		}
 		
-		public void IncreaseManaRegen(float regenIncrease)
+		public void IncreaseManaRegen(double regenIncrease)
 		{
 			// base mana regen can be increased as player progresses
 			ManaRegen += regenIncrease;
 		}
 		
 		// increases or decreases to regen will always be a flat cost hence the bonus stat to keep base regen stable
-		public void IncreaseBonusManaRegen(float regenIncrease)
+		public void IncreaseBonusManaRegen(double regenIncrease)
 		{
 		
 			BonusManaRegen += regenIncrease;
 		}
 		
-		public void DecreaseBonusManaRegen(float regenDecrease)
+		public void DecreaseBonusManaRegen(double regenDecrease)
 		{
 			BonusManaRegen -= regenDecrease;
 		}

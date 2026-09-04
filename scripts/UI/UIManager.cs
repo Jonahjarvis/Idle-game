@@ -80,9 +80,8 @@ namespace Idle_game.scripts.UI
 		{
 			statsLabel.Text =
 				$"Health: {GameManagerNode.CurrentPlayer.Health}\n" +
-				$"Strength: {GameManagerNode.CurrentPlayer.Strength}\n" +
-				$"Magical Power: {GameManagerNode.CurrentPlayer.MagicalPower}\n" +
-				$"Mana: {GameManagerNode.CurrentPlayer.Mana}";
+				$"Mana: {GameManagerNode.CurrentPlayer.Mana:F2}\n" +
+				$"Mana Regen: {GameManagerNode.CurrentPlayer.ManaRegen}";
 		}
 	}
 }

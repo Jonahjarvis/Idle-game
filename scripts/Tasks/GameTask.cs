@@ -29,7 +29,14 @@ namespace Idle_game.scripts.Tasks
 			IsActive = false;
 			Category = taskCategory;
 		}
-		
+		public virtual void ProcessTask(double delta)
+		{
+		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.
+		}
+		public virtual void GrantReward()
+		{
+		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.
+		}
 		// turns the task on and off
 		public abstract void Toggle();
 

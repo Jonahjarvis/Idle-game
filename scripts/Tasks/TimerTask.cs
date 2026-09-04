@@ -14,13 +14,10 @@ namespace Idle_game.scripts.Tasks
 		
 
 		public TimerTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
+			: base(taskName, stats, taskCategory)
 		{
-			TaskName = taskName;
 			Duration = duration;
-			Stats = stats;
 			TimeSpent = 0;
-			IsActive = false;
-			Category = taskCategory;
 		}
 
 		public override void Toggle()
@@ -31,7 +28,7 @@ namespace Idle_game.scripts.Tasks
 		}
 
 		// Delta math to determine if a task has been completed or not
-		public void ProcessTask(double delta)
+		public override void ProcessTask(double delta)
 		{
 			if (!IsActive) return;
 			// delta is time since last frame rendered so keeps task progress consistent regardless of frame rate
@@ -43,6 +40,7 @@ namespace Idle_game.scripts.Tasks
 				GrantReward(); // Calls the specific reward logic
 			}
 		}
+		
 
 	}
 }
