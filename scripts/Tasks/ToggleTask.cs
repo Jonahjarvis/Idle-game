@@ -8,8 +8,8 @@ namespace Idle_game.scripts.Tasks
 	public abstract class ToggleTask : GameTask
 	{
 		public ToggleTask(string taskName, PlayerStats stats, TaskCategory category) 
-			: base(taskName, stats, category)
-		{
+			: base(taskName, stats, category){ }
+			
 			public override void Toggle()
 			{
 				// Just turns the task on or off
@@ -22,6 +22,6 @@ namespace Idle_game.scripts.Tasks
 			}
 			protected abstract void EnableToggle();
 			protected abstract void DisableToggle();
-		}
+		
 	}
 }
