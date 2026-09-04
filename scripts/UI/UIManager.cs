@@ -79,9 +79,9 @@ namespace Idle_game.scripts.UI
 		private void UpdateStatsDisplay()
 		{
 			statsLabel.Text =
-				$"Health: {GameManagerNode.CurrentPlayer.Health}\n" +
-				$"Mana: {GameManagerNode.CurrentPlayer.CurrentMana:F2}\n" +
-				$"Mana Regen: {GameManagerNode.CurrentPlayer.ManaRegen.Total}";
+				$"Health: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.Health)}\n" +
+				$"Mana: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.CurrentMana)}/{FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.MaxMana.Total)} \n" +
+				$"Mana Regen: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.ManaRegen.Total)}/s";
 		}
 	}
 }
