@@ -15,10 +15,10 @@ namespace Idle_game.scripts.Tasks
 	public abstract class GameTask
 	{
 		// Basic overarching Task abstract class for all common tasks that will be implemented
-		public string TaskName { get; private set; }
-		public bool IsActive { get; private set; }
+		public string TaskName { get; protected set; }
+		public bool IsActive { get; protected set; }
 		
-		public TaskCategory Category { get; private set; }
+		public TaskCategory Category { get; protected set; }
 		// Pass in PlayerStats so the task can grant the reward/stat modifier to the player
 		protected PlayerStats Stats; 
 
@@ -29,16 +29,9 @@ namespace Idle_game.scripts.Tasks
 			IsActive = false;
 			Category = taskCategory;
 		}
-
-		public void Toggle()
-		{
-			// Just turns the task on or off
-			IsActive = !IsActive;
-		}
-
-		// Task execution logic
-		public abstract void ProcessTask();
-
+		
+		// turns the task on and off
+		public abstract void Toggle();
 
 	}
 }

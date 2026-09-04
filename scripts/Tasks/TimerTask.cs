@@ -6,14 +6,14 @@ using Idle_game.scripts.Player;
 namespace Idle_game.scripts.Tasks
 {
 	
-	public abstract class TimerTask : GameTasks
+	public abstract class TimerTask : GameTask
 	{
 
 		public double Duration { get; private set; }
 		public double TimeSpent { get; private set; }
 		
 
-		public GameTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
+		public TimerTask(string taskName, double duration, PlayerStats stats, TaskCategory taskCategory)
 		{
 			TaskName = taskName;
 			Duration = duration;
