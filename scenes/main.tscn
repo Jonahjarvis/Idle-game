@@ -3,6 +3,20 @@
 [ext_resource type="Script" uid="uid://b5lpodw32u7v" path="res://scripts/Core/GameManager.cs" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bb38wec2rs5pi" path="res://scripts/UI/UIManager.cs" id="2_0wfyh"]
 
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+offsets = PackedFloat32Array(0, 0.9787234, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.60638297, 0.60638297, 0.60638297, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sugp2"]
+gradient = SubResource("Gradient_0wfyh")
+
+[sub_resource type="Gradient" id="Gradient_jyhfs"]
+offsets = PackedFloat32Array(0, 0.7446808, 0.9893617, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.009953439, 0.42894748, 0.7134773, 1, 0.405972, 0.6573685, 0.8280864, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tbgi4"]
+gradient = SubResource("Gradient_jyhfs")
+
 [node name="GameManager" type="Control" unique_id=1816132853]
 layout_mode = 3
 anchors_preset = 15
@@ -51,4 +65,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TaskProgressBar" type="TextureProgressBar" parent="UIManager/TrainingPage" unique_id=586571150]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_stretch_ratio = 4.69
+step = 0.01
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_sugp2")
+texture_progress = SubResource("GradientTexture1D_tbgi4")
