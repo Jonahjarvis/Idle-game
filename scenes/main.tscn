@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o5qli")
 
-[node name="UIManager" type="Control" parent="." unique_id=1930165921 node_paths=PackedStringArray("GameManagerNode")]
+[node name="UIManager" type="Control" parent="." unique_id=1930165921 node_paths=PackedStringArray("GameManagerNode", "TaskProgressBar")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_0wfyh")
 GameManagerNode = NodePath("..")
+TaskProgressBar = NodePath("TrainingPage/TaskProgressBar")
 
 [node name="TrainingPage" type="VBoxContainer" parent="UIManager" unique_id=220688598]
 layout_mode = 1
@@ -46,4 +47,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ProgressionColumn" type="VBoxContainer" parent="UIManager/TrainingPage/HBoxContainer" unique_id=651819006]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TaskProgressBar" type="TextureProgressBar" parent="UIManager/TrainingPage" unique_id=586571150]
 layout_mode = 2

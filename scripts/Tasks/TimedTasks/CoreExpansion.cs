@@ -6,8 +6,6 @@ namespace Idle_game.scripts.Tasks
 {
 	public class CoreExpansionTask : TimerTask
 	{
-		// Cache the amount of mana paid
-		private double _manaPaid = 0.0;
 
 		public CoreExpansionTask(Player player) 
 			: base("Core Expansion", 10.0, player, TaskCategory.Progression) { }
@@ -19,24 +17,20 @@ namespace Idle_game.scripts.Tasks
 
 		protected override void OnStart()
 		{
-			// Save the exact cost, then deduct it
-			_manaPaid = Stats.MaxMana.Total;
-			Stats.DecreaseCurrentMana(_manaPaid);
+			Stats.DecreaseCurrentMana(Stats.MaxMana.Total);
 		}
 
 		// Triggered if the player clicks away before finishing
 		public override void CancelTask()
 		{
-			// Refund the mana spent
-			Stats.IncreaseCurrentMana(_manaPaid);
-			
-			// Call the base method to reset TimeSpent and IsActive
-			base.CancelTask();
+			// only set IsActive to false which preserves time spent if the user wants to pick the task up again.
+			IsActive = false;
 		}
+
+		
 
 		protected override void GrantReward()
 		{
-			
 			Stats.MaxMana.IncreaseBaseValue(1.0);
 		}
 	}

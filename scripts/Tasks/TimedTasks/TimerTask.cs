@@ -22,14 +22,14 @@ namespace Idle_game.scripts.Tasks
 
 		public override void StartTask()
 		{
-			// first variable is flat modifier, second is multiplicative modifier
-			if (CanStart())
-			{
-				IsActive = true;
-				
-			}
+			// sets the task to active only to prevent outside classes modifying IsActive directly
+			IsActive = true;
+		}
 			
-			
+		protected override void OnComplete()
+		{
+			GrantReward();
+			TimeSpent = 0;
 		}
 		
 		public override void CancelTask()
@@ -41,18 +41,24 @@ namespace Idle_game.scripts.Tasks
 		public override void ProcessTask(double delta)
 		{
 			if (!IsActive) return;
-			// delta is time since last frame rendered so keeps task progress consistent regardless of frame rate
-			TimeSpent += delta;
 
-			while (TimeSpent >= Duration)
+			if (TimeSpent == 0)
 			{
-				TimeSpent = 0;
-				GrantReward(); // Calls the specific reward logic
-				if (!CanStart())
-				{
-					CancelTask();
+				if (CanStart()) {
+					// checks to see if task can start 
+					OnStart();
+				} else {
+					// requirements to repeat the task not met yet
+					return;
 				}
 			}
+			// delta is time since last frame rendered so keeps task progress consistent regardless of frame rate
+			TimeSpent += delta;
+			if (TimeSpent >= Duration)
+			{
+				OnComplete(); // Calls the specific reward logic
+			}
+			
 		}
 	}
 }

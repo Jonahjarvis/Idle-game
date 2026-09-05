@@ -44,6 +44,11 @@ namespace Idle_game.scripts.Tasks
 		{
 		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.
 		}
+		protected virtual void OnComplete()
+		{
+			// Does nothing because unused by toggled tasks.
+		}
+		
 		protected virtual void GrantReward()
 		{
 		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.

@@ -7,7 +7,7 @@ namespace Idle_game.scripts.Characters
 	{
 		public event Action OnAnyStatUpdated;
 		
-		public PlayerStat ManaRegen { get; private set; } = new PlayerStat(0.0);
+		public PlayerStat ManaRegen { get; private set; } = new PlayerStat(0.11);
 		public PlayerStat MaxMana { get; private set; } = new PlayerStat(5.0);
 		
 		public int health { get; private set; } = 100;

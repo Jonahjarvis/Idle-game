@@ -44,10 +44,12 @@ public class PlayerStat
 	public void IncreaseBaseValue(double increase)
 	{
 		BaseValue += increase;
+		OnStatUpdated?.Invoke(); 
 	}
 	public void DecreaseBaseValue(double decrease)
 	{
 		BaseValue -= decrease;
+		OnStatUpdated?.Invoke(); 
 	}
 	
 	

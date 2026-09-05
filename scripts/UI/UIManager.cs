@@ -10,13 +10,15 @@ namespace Idle_game.scripts.UI
 	{
 		// Export makes GameManager visible for UIManager in the inspector tool
 		// So I can drag the GameManager node into UIManagers inspector to give UIManager a reference
-		[Export] 
-		public GameManager GameManagerNode { get; set; }
+		[Export] public GameManager GameManagerNode { get; set; }
 		// Containers and labels for displaying stats and tasks
+		[Export] public Godot.TextureProgressBar TaskProgressBar;
+		
 		private Label statsLabel;
 		private VBoxContainer trainingContainer;
 		private VBoxContainer combatContainer;
 		private VBoxContainer progressionContainer;
+		
 		
 		// Dictionary of all generated task buttons
 		private Dictionary<GameTask, Button> taskButtons = new Dictionary<GameTask, Button>();
@@ -36,6 +38,30 @@ namespace Idle_game.scripts.UI
 
 			UpdateStatsDisplay();
 			GenerateTaskButtons();
+		}
+		
+		public override void _Process(double delta) 
+		{
+			UpdateTaskProgressBar();
+		}
+		
+		private void UpdateTaskProgressBar()
+		{
+			// 1. Get the current task from the GameManager
+			GameTask currentTask = GameManagerNode.ActiveTask;
+			// 2. Check if it's a TimerTask and if it's running
+			if (currentTask is TimerTask activeTimer && activeTimer.IsActive)
+			{
+				TaskProgressBar.Visible = true;
+				TaskProgressBar.MaxValue = activeTimer.Duration;
+				TaskProgressBar.Value = activeTimer.TimeSpent;
+			}
+			else
+			{
+
+				// Hide the bar if no timer task is active
+				TaskProgressBar.Visible = false;
+			}
 		}
 
 		private void GenerateTaskButtons()
