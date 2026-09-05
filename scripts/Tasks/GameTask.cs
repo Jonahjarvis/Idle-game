@@ -9,7 +9,8 @@ namespace Idle_game.scripts.Tasks
 	public enum TaskCategory 
 	{
 		Training,
-		Combat
+		Combat,
+		Progression
 	}
 	
 	public abstract class GameTask
@@ -29,16 +30,31 @@ namespace Idle_game.scripts.Tasks
 			IsActive = false;
 			Category = taskCategory;
 		}
+		
+		protected virtual bool CanStart()
+		{
+			return true;
+		}
+		protected virtual void OnStart()
+		{
+			// does nothing by default, some tasks might have something happen when starting	
+		}
+		
 		public virtual void ProcessTask(double delta)
 		{
 		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.
 		}
-		public virtual void GrantReward()
+		protected virtual void GrantReward()
 		{
 		// Does nothing because unused by toggled tasks. Other subclasses like TimerTask will override this.
 		}
-		// turns the task on and off
-		public abstract void Toggle();
+		// turns the task on 
+		public abstract void StartTask();
+		
+		// turns the task off
+		public abstract void CancelTask();
+
+		
 
 	}
 }

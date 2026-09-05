@@ -10,8 +10,8 @@ namespace Idle_game.scripts.Characters
 		public PlayerStat ManaRegen { get; private set; } = new PlayerStat(0.0);
 		public PlayerStat MaxMana { get; private set; } = new PlayerStat(5.0);
 		
-		public int Health { get; private set; } = 100;
-		public Double CurrentMana { get; private set; } = 0;
+		public int health { get; private set; } = 100;
+		public Double currentMana { get; private set; } = 0;
 		
 		public Player()
 		{
@@ -29,10 +29,10 @@ namespace Idle_game.scripts.Characters
 		
 		public void IncreaseCurrentMana(double IncreaseAmount)
 		{
-			if (CurrentMana + IncreaseAmount >= MaxMana.Total) {
-				CurrentMana = MaxMana.Total;
+			if (currentMana + IncreaseAmount >= MaxMana.Total) {
+				currentMana = MaxMana.Total;
 			} else {
-				CurrentMana += IncreaseAmount;
+				currentMana += IncreaseAmount;
 			}
 			OnAnyStatUpdated?.Invoke();
 			
@@ -40,7 +40,7 @@ namespace Idle_game.scripts.Characters
 		public void DecreaseCurrentMana(double DecreaseAmount)
 		{
 			// logic to check if the player has enough mana will occur before the spell/task is cast so no need to prevent it here.
-			CurrentMana -= DecreaseAmount;
+			currentMana -= DecreaseAmount;
 			OnAnyStatUpdated?.Invoke();
 		}
 

@@ -20,11 +20,21 @@ namespace Idle_game.scripts.Tasks
 			TimeSpent = 0;
 		}
 
-		public override void Toggle()
+		public override void StartTask()
 		{
-			// Just turns the task on or off
-			IsActive = !IsActive;
-			if (!IsActive) TimeSpent = 0; // Reset progress if canceled
+			// first variable is flat modifier, second is multiplicative modifier
+			if (CanStart())
+			{
+				IsActive = true;
+				
+			}
+			
+			
+		}
+		
+		public override void CancelTask()
+		{
+			IsActive = false;
 		}
 
 		// Delta math to determine if a task has been completed or not
@@ -36,11 +46,13 @@ namespace Idle_game.scripts.Tasks
 
 			while (TimeSpent >= Duration)
 			{
-				TimeSpent -= Duration;
+				TimeSpent = 0;
 				GrantReward(); // Calls the specific reward logic
+				if (!CanStart())
+				{
+					CancelTask();
+				}
 			}
 		}
-		
-
 	}
 }

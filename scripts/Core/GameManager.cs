@@ -27,6 +27,7 @@ namespace Idle_game.scripts.Core
 			AvailableTasks = new List<GameTask>();
 			// Add starting tasks to AvailableTasks
 			AvailableTasks.Add(new ManaCyclingTask(CurrentPlayer));
+			AvailableTasks.Add(new CoreExpansionTask(CurrentPlayer));
 		}
 
 		public override void _Process(double delta)
@@ -43,7 +44,7 @@ namespace Idle_game.scripts.Core
 			if (ActiveTask == clickedTask)
 			{
 				// This sets IsActive to false and resets TimeSpent
-				ActiveTask.Toggle(); 
+				ActiveTask.CancelTask(); 
 				ActiveTask = null;
 			}
 			// If task is not already on
@@ -52,12 +53,12 @@ namespace Idle_game.scripts.Core
 				// Turn off the old task if one was running
 				if (ActiveTask != null)
 				{
-					ActiveTask.Toggle();
+					ActiveTask.CancelTask();
 				}
 
 				// Set the new task as active and turn it on
 				ActiveTask = clickedTask;
-				ActiveTask.Toggle();
+				ActiveTask.StartTask();
 			}
 
 			// Alert any listeners (the UI) that the active task has changed

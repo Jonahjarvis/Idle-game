@@ -16,6 +16,7 @@ namespace Idle_game.scripts.UI
 		private Label statsLabel;
 		private VBoxContainer trainingContainer;
 		private VBoxContainer combatContainer;
+		private VBoxContainer progressionContainer;
 		
 		// Dictionary of all generated task buttons
 		private Dictionary<GameTask, Button> taskButtons = new Dictionary<GameTask, Button>();
@@ -26,7 +27,7 @@ namespace Idle_game.scripts.UI
 			statsLabel = GetNode<Label>("TrainingPage/StatsLabel");
 			trainingContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/TrainingColumn");
 			combatContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/CombatColumn");
-			
+			progressionContainer = GetNode<VBoxContainer>("TrainingPage/HBoxContainer/ProgressionColumn");
 			// Listen for when stats change to update display
 			GameManagerNode.CurrentPlayer.OnAnyStatUpdated += UpdateStatsDisplay;
 			
@@ -49,13 +50,17 @@ namespace Idle_game.scripts.UI
 				newButton.Pressed += () => GameManagerNode.ToggleTask(task);
 
 				// Task buttons are sorted into different parts of the UI depending on category
-				if (task.Category == TaskCategory.Training)
+				switch (task.Category)
 				{
-					trainingContainer.AddChild(newButton);
-				}
-				else if (task.Category == TaskCategory.Combat)
-				{
-					combatContainer.AddChild(newButton);
+					case TaskCategory.Training:
+						trainingContainer.AddChild(newButton);
+						break;
+					case TaskCategory.Combat:
+						combatContainer.AddChild(newButton);
+						break;
+					case TaskCategory.Progression:
+						progressionContainer.AddChild(newButton);
+						break;
 				}
 
 				// Save the button to dictionary
@@ -79,8 +84,8 @@ namespace Idle_game.scripts.UI
 		private void UpdateStatsDisplay()
 		{
 			statsLabel.Text =
-				$"Health: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.Health)}\n" +
-				$"Mana: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.CurrentMana)}/{FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.MaxMana.Total)} \n" +
+				$"Health: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.health)}\n" +
+				$"Mana: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.currentMana)}/{FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.MaxMana.Total)} \n" +
 				$"Mana Regen: {FormatUtil.FormatNumber(GameManagerNode.CurrentPlayer.ManaRegen.Total)}/s";
 		}
 	}
