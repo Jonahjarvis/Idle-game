@@ -65,5 +65,7 @@ namespace Idle_game.scripts.Core
 			// Alert any listeners (the UI) that the active task has changed
 			OnActiveTaskChanged?.Invoke();
 		}
+
+		
 	}
 }

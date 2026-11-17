@@ -42,6 +42,7 @@ namespace Idle_game.scripts.UI
 		
 		public override void _Process(double delta) 
 		{
+			UpdateStatsDisplay();
 			UpdateTaskProgressBar();
 		}
 		

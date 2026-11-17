@@ -7,7 +7,7 @@ namespace Idle_game.scripts.Tasks
 	public class ConcentrateManaFlowTask : TimerTask
 	{
 		
-		public override string TaskName => $"Concentrate Mana Flow: {Cost:F1} Mana";
+		public override string TaskName => $"Concentrate Mana Flow: {FormatUtil.FormatNumber(Cost)} Mana";
 		public ConcentrateManaFlowTask(Player player) 
 			: base($"Concentrate Mana Flow", 5.0, player, TaskCategory.Progression) { 
 				Cost = Stats.MaxMana.Total;

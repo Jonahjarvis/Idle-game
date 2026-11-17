@@ -16,6 +16,6 @@ A progression-fantasy idle RPG built in **Godot 4** using **C#**, inspired by *C
 
 The codebase follows a decoupled **Model-View-Controller (MVC)** pattern to separate simulation logic from Godot's UI scene tree:
 
-* **State & Simulation (`GameManager` & `PlayerStat`):** `GameManager` serves as the central backend controller, enforcing a single-active-task constraint for processing using `_Process(double delta)`. `PlayerStat` is the base class for any stats created, including all of the necessary methods to update the UI and allow stats to be modified.
+* **State & Simulation (`GameManager` & `PlayerStat`):** `GameManager` serves as the central backend controller, enforcing a single-active-task constraint for processing using `_Process(double delta)`. `PlayerStat` is the base class for any stats created, including all of the necessary methods to allow stats to be accessed and modified.
 * **Polymorphic Task System (`GameTask`):** Built around an abstract `GameTask` base class (`[GlobalClass]`) with specialized subclasses (`TimerTask`, `ToggleTask`) and `TaskCategory` enums, allowing new tasks to be added without modifying manager or UI code.
 * **Decoupled Presentation (`UIManager`):** Listens to backend state changes and dynamically binds task actions via C# lambda callbacks, keeping UI nodes independent of core game rules.

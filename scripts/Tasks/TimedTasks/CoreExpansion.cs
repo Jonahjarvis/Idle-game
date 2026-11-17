@@ -7,7 +7,7 @@ namespace Idle_game.scripts.Tasks
 	public class CoreExpansionTask : TimerTask
 	{
 		
-		public override string TaskName => $"Core Expansion: {Cost:F1} Mana";
+		public override string TaskName => $"Core Expansion: {FormatUtil.FormatNumber(Cost)} Mana";
 		public CoreExpansionTask(Player player) 
 			: base($"Core Expansion", 10.0, player, TaskCategory.Progression) {
 				 Cost = Stats.MaxMana.Total;
