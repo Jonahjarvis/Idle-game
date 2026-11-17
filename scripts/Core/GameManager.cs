@@ -28,6 +28,7 @@ namespace Idle_game.scripts.Core
 			// Add starting tasks to AvailableTasks
 			AvailableTasks.Add(new ManaCyclingTask(CurrentPlayer));
 			AvailableTasks.Add(new CoreExpansionTask(CurrentPlayer));
+			AvailableTasks.Add(new ConcentrateManaFlowTask(CurrentPlayer));
 		}
 
 		public override void _Process(double delta)

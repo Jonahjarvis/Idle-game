@@ -16,7 +16,7 @@ namespace Idle_game.scripts.Tasks
 		public override void StartTask()
 		{
 			// first variable is flat modifier, second is multiplicative modifier
-			Stats.ManaRegen.SetActiveTaskBonus(0.01,2.0); 
+			Stats.ManaRegen.SetActiveTaskBonus(0,4.0); 
 			IsActive = true;
 		}
 		
