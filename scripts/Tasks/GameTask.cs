@@ -16,8 +16,10 @@ namespace Idle_game.scripts.Tasks
 	public abstract class GameTask
 	{
 		// Basic overarching Task abstract class for all common tasks that will be implemented
-		public string TaskName { get; protected set; }
+		public virtual string TaskName { get; protected set; }
 		public bool IsActive { get; protected set; }
+		
+		public double Cost {get; protected set; }
 		
 		public TaskCategory Category { get; protected set; }
 		// Pass in Player so the task can grant the reward/stat modifier to the player

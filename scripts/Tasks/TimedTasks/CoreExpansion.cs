@@ -6,18 +6,22 @@ namespace Idle_game.scripts.Tasks
 {
 	public class CoreExpansionTask : TimerTask
 	{
-
+		
+		public override string TaskName => $"Core Expansion: {Cost:F1} Mana";
 		public CoreExpansionTask(Player player) 
-			: base("Core Expansion", 10.0, player, TaskCategory.Progression) { }
-
+			: base($"Core Expansion", 10.0, player, TaskCategory.Progression) {
+				 Cost = Stats.MaxMana.Total;
+				 }
+			
+			
 		protected override bool CanStart()
 		{
-			return Stats.currentMana >= Stats.MaxMana.Total;
+			return Stats.currentMana >= Cost;
 		}
 
 		protected override void OnStart()
 		{
-			Stats.DecreaseCurrentMana(Stats.MaxMana.Total);
+			Stats.DecreaseCurrentMana(Cost);
 		}
 
 		// Triggered if the player clicks away before finishing
@@ -31,6 +35,7 @@ namespace Idle_game.scripts.Tasks
 
 		protected override void GrantReward()
 		{
+			Cost += 1.0;
 			Stats.MaxMana.IncreaseBaseValue(1.0);
 		}
 	}

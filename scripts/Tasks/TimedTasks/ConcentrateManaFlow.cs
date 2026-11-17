@@ -6,21 +6,22 @@ namespace Idle_game.scripts.Tasks
 {
 	public class ConcentrateManaFlowTask : TimerTask
 	{
-		private double ManaRequirement;
+		
+		public override string TaskName => $"Concentrate Mana Flow: {Cost:F1} Mana";
 		public ConcentrateManaFlowTask(Player player) 
-			: base("Concentrate Mana Flow", 5.0, player, TaskCategory.Progression) { 
-				ManaRequirement = Stats.MaxMana.Total;
+			: base($"Concentrate Mana Flow", 5.0, player, TaskCategory.Progression) { 
+				Cost = Stats.MaxMana.Total;
 			}
 		
 		protected override bool CanStart()
 		{
-			return Stats.currentMana >= ManaRequirement;
+			return Stats.currentMana >= Cost;
 		}
 
 		protected override void OnStart()
 		{
-			Stats.DecreaseCurrentMana(ManaRequirement);
-			ManaRequirement += 0.1;
+			Stats.DecreaseCurrentMana(Cost);
+			
 		}
 
 		// Triggered if the player clicks away before finishing
@@ -34,6 +35,7 @@ namespace Idle_game.scripts.Tasks
 
 		protected override void GrantReward()
 		{
+			Cost += 0.1;
 			Stats.ManaRegen.IncreaseBaseValue(0.02);
 		}
 	}

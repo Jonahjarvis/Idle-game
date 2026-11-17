@@ -17,8 +17,8 @@ namespace Idle_game.scripts.Characters
 		{
 			// Tell the Player to listen to its own child objects.
 			// Whenever a stat updates, it calls TriggerStatUpdate.
-			ManaRegen.OnStatUpdated += TriggerStatUpdate;
-			MaxMana.OnStatUpdated += TriggerStatUpdate;
+			// ManaRegen.OnStatUpdated += TriggerStatUpdate;
+			// MaxMana.OnStatUpdated += TriggerStatUpdate;
 		}
 		private void TriggerStatUpdate()
 		{
